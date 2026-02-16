@@ -28,7 +28,10 @@
     <div id="start-overlay"
         style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,245,247,0.95); z-index:99999; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; transition:opacity 0.5s;">
         <div style="font-size:60px; animation:bounce 2s infinite;">💌</div>
-        <h1 style="color:#FF9EAA; font-family:'Quicksand', sans-serif;">Happy birthday My Sweetheart!</h1>
+        <h1
+            style="color:#FF9EAA; font-family:'Quicksand', sans-serif; text-align:center; padding:0 20px; line-height:1.2; word-wrap:break-word;">
+            Happy birthday My Sweetheart!
+        </h1>
         <button onclick="enterSite()"
             style="padding:15px 40px; font-size:18px; background:#FF9EAA; color:white; border:none; border-radius:50px; cursor:pointer; font-weight:bold; box-shadow:0 5px 15px rgba(255,158,170,0.4); transition:transform 0.2s;">
             Open Message
@@ -185,13 +188,13 @@
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top:15px;">
                     <div
                         style="background:white; padding:10px; box-shadow:0 4px 6px rgba(0,0,0,0.1); transform:rotate(-2deg);">
-                        <img src="{{ url_for('static', filename='img/memory_date.png') }}"
+                        <img src="{{ url_for('static', filename='img/memory_date.jpeg') }}"
                             style="width:100%; border-radius:5px; display:block;">
                         <p style="font-size:12px; text-align:center; margin-top:5px; color:#555;">Our first date</p>
                     </div>
                     <div
                         style="background:white; padding:10px; box-shadow:0 4px 6px rgba(0,0,0,0.1); transform:rotate(2deg);">
-                        <img src="{{ url_for('static', filename='img/memory_food.png') }}"
+                        <img src="{{ url_for('static', filename='img/memory_night.jpeg') }}"
                             style="width:100%; border-radius:5px; display:block;">
                         <p style="font-size:12px; text-align:center; margin-top:5px; color:#555;">my favorite Spot with
                             tou</p>
@@ -199,7 +202,7 @@
                 </div>
                 <div
                     style="margin-top:15px; background:white; padding:10px; box-shadow:0 4px 6px rgba(0,0,0,0.1); transform:rotate(-1deg); width:80%; margin-left:auto; margin-right:auto;">
-                    <img src="{{ url_for('static', filename='img/memory_night.png') }}"
+                    <img src="{{ url_for('static', filename='img/memory_food.jpeg') }}"
                         style="width:100%; border-radius:5px; display:block;">
                     <p style="font-size:12px; text-align:center; margin-top:5px; color:#555;">Late Night Cravings</p>
                 </div>

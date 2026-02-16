@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Play Audio
             if (bgm) bgm.play().catch(e => console.log("Audio requires interaction"));
             // Trigger Confetti
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, zIndex: 9999 });
             // Show Guide Arrow after delay
             setTimeout(() => {
                 const guide = document.getElementById('guide-arrow');
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- WINDOW MANAGEMENT ---
     const windows = document.querySelectorAll('.window');
-    let highestZ = 100;
+    let highestZ = 2000; // Start higher than sidebar (1000)
 
     // Make windows draggable
     windows.forEach(win => {
