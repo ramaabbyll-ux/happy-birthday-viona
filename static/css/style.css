@@ -1,0 +1,260 @@
+:root {
+    --primary: #FFB6C1;
+    --primary-dark: #FF69B4;
+    --secondary: #E6E6FA;
+    --accent: #FFD700;
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --text-dark: #2D3436;
+    --text-light: #636E72;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: #f0f2f5;
+}
+
+/* Dynamic Background */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: floatOrb 20s infinite ease-in-out alternate;
+}
+
+.orb-1 {
+    width: 500px;
+    height: 500px;
+    background: #FFB6C1;
+    top: -100px;
+    left: -100px;
+}
+
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: #E6E6FA;
+    bottom: -50px;
+    right: -50px;
+    animation-delay: -5s;
+}
+
+.orb-3 {
+    width: 300px;
+    height: 300px;
+    background: #FFD700;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -10s;
+}
+
+@keyframes floatOrb {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(30px, 50px) scale(1.1);
+    }
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--text-dark);
+}
+
+/* Glassmorphism Classes */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero Section */
+.fullscreen-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 2rem;
+}
+
+.hero-title {
+    font-size: 5rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #FF69B4, #A020F0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+.hero-subtitle {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--text-light);
+    margin-bottom: 2.5rem;
+}
+
+.hero-badge {
+    background: rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    color: #d4a000;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+    display: inline-block;
+}
+
+/* Cards */
+.content-section {
+    padding: 6rem 0;
+}
+
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.card {
+    padding: 2.5rem;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(31, 38, 135, 0.15);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.card-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Love Letter */
+.letter-card {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 4rem;
+    position: relative;
+    font-size: 1.2rem;
+    line-height: 1.9;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.core-promise {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    padding: 2rem;
+    border-top: 2px solid rgba(255, 182, 193, 0.5);
+    border-bottom: 2px solid rgba(255, 182, 193, 0.5);
+    background: rgba(255, 182, 193, 0.1);
+    border-radius: 10px;
+    margin: 3rem 0;
+}
+
+/* Cake */
+.cake-bg {
+    position: relative;
+}
+
+.cake-emoji {
+    font-size: 10rem;
+    cursor: pointer;
+    transition: transform 0.5s elastic-out;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+.cake-emoji:hover {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* Polaroids */
+.polaroid {
+    background: #fff;
+    padding: 1rem 1rem 3rem 1rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: rotate(-3deg);
+    transition: all 0.4s ease;
+}
+
+.polaroid:nth-child(even) {
+    transform: rotate(2deg);
+}
+
+.polaroid:hover {
+    transform: rotate(0) scale(1.1);
+    z-index: 10;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Floating Elements */
+.floating-btn {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+/* Achievements */
+.achievements-grid {
+    gap: 3rem;
+}
+
+.achievement-number {
+    font-size: 4rem;
+    background: linear-gradient(to bottom, #FF69B4, #FFB6C1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Loading */
+#loading-screen {
+    background: #fff;
+    /* Opaque white to hide load */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .letter-card {
+        padding: 2rem;
+    }
+}
