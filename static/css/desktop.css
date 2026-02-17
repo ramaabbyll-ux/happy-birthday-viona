@@ -536,22 +536,25 @@ body {
     }
 }
 
-@keyframes spin-crazy {
+@keyframes fallDown {
     0% {
-        transform: rotate(0deg) scale(1);
-    }
-
-    50% {
-        transform: rotate(180deg) scale(1.2);
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
     }
 
     100% {
-        transform: rotate(360deg) scale(1);
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
     }
 }
 
-.spin-effect {
-    animation: spin-crazy 0.8s ease-in-out;
+.love-rain {
+    position: fixed;
+    top: -10vh;
+    font-size: 24px;
+    z-index: 99999;
+    pointer-events: none;
+    animation: fallDown linear forwards;
 }
 
 /* --- COMPONENTS --- */
@@ -668,6 +671,16 @@ body {
 }
 
 @media (max-width: 768px) {
+
+    /* Allow body scroll on mobile */
+    body {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        /* Smooth scroll on iOS */
+    }
+
     #desktop-container {
         display: grid;
         grid-template-columns: 60px 1fr;
@@ -677,8 +690,10 @@ body {
         gap: 15px;
         height: auto;
         min-height: 100vh;
-        overflow-y: auto;
-        padding: 0 10px 40px 10px;
+        overflow: visible;
+        /* Let body handle scroll */
+        padding: 0 10px 80px 10px;
+        /* More bottom padding for safe area */
     }
 
     /* 1. Header (Spans all) */
@@ -686,7 +701,8 @@ body {
         grid-column: 1 / -1;
         grid-row: 1;
         position: sticky;
-        top: 10px;
+        top: 0;
+        /* Stick to top correctly */
         z-index: 200;
         margin-bottom: 0;
     }

@@ -207,16 +207,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // --- CLOSE MODAL ON OUTSIDE CLICK ---
     document.addEventListener('click', (e) => {
-        // Check if the click is inside a window or on an icon (trigger)
+        // ... (existing logic) ...
         const isClickInsideModal = e.target.closest('.glass-window');
         const isClickOnTrigger = e.target.closest('.circle-icon');
+        const isClickOnAvatar = e.target.closest('.polaroid-frame'); // Don't close if clicking avatar (optional)
 
-        // If click is outside modal AND not on a trigger button
-        if (!isClickInsideModal && !isClickOnTrigger) {
+        if (!isClickInsideModal && !isClickOnTrigger && !isClickOnAvatar) {
             document.querySelectorAll('.glass-window.open').forEach(modal => {
                 modal.classList.remove('open');
             });
         }
     });
+
+    // --- AVATAR EASTER EGG (LOVE RAIN) ---
+    const avatarFrame = document.querySelector('.polaroid-frame');
+
+    function createHeartRain() {
+        const hearts = ['❤️', '💖', '💘', '💝', '💕', '😍', '🥰'];
+        const heart = document.createElement('div');
+        heart.classList.add('love-rain');
+        heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+
+        // Randomize position and animation
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 2 + 2) + 's'; // 2-4s duration
+        heart.style.fontSize = (Math.random() * 20 + 20) + 'px'; // 20-40px size
+
+        document.body.appendChild(heart);
+
+        // Cleanup after animation
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+
+    if (avatarFrame) {
+        avatarFrame.addEventListener('click', () => {
+            // 1. Trigger Rain Loop
+            let count = 0;
+            const rainInterval = setInterval(() => {
+                createHeartRain();
+                count++;
+                if (count > 50) clearInterval(rainInterval); // Stop after 50 hearts
+            }, 100); // New heart every 100ms
+
+            // 2. Change caption temporarily
+            const caption = avatarFrame.querySelector('.polaroid-caption');
+            const originalText = caption.textContent;
+            caption.textContent = "It's Raining Love! ☔️❤️";
+            caption.style.color = "#FF9EAA";
+
+            setTimeout(() => {
+                caption.textContent = originalText;
+                caption.style.color = "";
+            }, 5000);
+        });
+    }
 
 });
