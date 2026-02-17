@@ -249,16 +249,24 @@ body {
     max-width: 90%;
     transform: translate(-50%, -50%) scale(0);
     background: rgba(255, 255, 255, 0.85);
+    /* Slightly less opacity for vibrancy */
     backdrop-filter: blur(10px);
     border-radius: 20px;
     border: 1px solid white;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-    padding: 30px;
+    padding: 0;
+    /* REMOVED PADDING to let header flush */
     opacity: 0;
     transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     z-index: 2000;
     max-height: 80vh;
-    overflow-y: auto;
+    /* Reduced height for better sticky behavior */
+    display: flex;
+    /* Flex layout */
+    flex-direction: column;
+    /* Stack header and content */
+    overflow: hidden;
+    /* Hide overflow globally, handle in content */
 }
 
 .glass-window.open {
@@ -266,30 +274,117 @@ body {
     opacity: 1;
 }
 
-/* Window Header for Dragging */
+/* Window Header for Dragging (Browser Style) */
 .window-header {
     cursor: move;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+    flex-shrink: 0;
+    /* Prevent header shrink */
+    z-index: 100;
+    background: #f0f0f0;
+    backdrop-filter: blur(10px);
+    margin: 0;
+    /* Reset margins */
+    padding: 0 15px;
+    /* Horizontal padding only */
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    position: relative;
-    /* Close button is inside this */
+    border-radius: 20px 20px 0 0;
+    /* Top rounding only */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 44px;
+    width: 100%;
 }
 
-.window-close {
-    position: absolute;
-    top: 5px;
-    /* Adjusted to avoid clipping */
-    right: 10px;
-    /* Move inward */
-    font-size: 24px;
+/* Scrollable Content Area */
+.window-content {
+    padding: 30px;
+    overflow-y: auto;
+    /* Internal scroll */
+    flex-grow: 1;
+    /* Take remaining space */
+    /* Ensure scrollbar looks nice */
+}
+
+/* Mac Traffic Lights Container */
+.mac-buttons {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+    /* Prevent shrinking */
+}
+
+/* Base Button Style */
+.mac-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    color: #aaa;
-    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    /* For the X symbol */
+    color: transparent;
+    /* Hide symbol by default */
+    transition: all 0.2s;
 }
 
-.window-close:hover {
-    color: #ff6b6b;
+.mac-btn.red {
+    background: #ff5f56;
+    border-color: #e0443e;
+}
+
+.mac-btn.yellow {
+    background: #ffbd2e;
+    border-color: #dea123;
+}
+
+.mac-btn.green {
+    background: #27c93f;
+    border-color: #1aab29;
+}
+
+/* Show X on Hover */
+.mac-btn.red:hover {
+    color: #4d0000;
+    background: #ff5f56;
+}
+
+.mac-btn.red:hover::before {
+    content: "✕";
+    font-weight: bold;
+}
+
+/* Address Bar Styling */
+.window-address-bar {
+    flex-grow: 1;
+    background: #e3e3e3;
+    /* Slightly darker than header bg */
+    border-radius: 8px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    font-size: 12px;
+    color: #888;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.window-address-bar:hover {
+    background: #dcdcdc;
+}
+
+.window-address-bar i {
+    font-size: 10px;
+}
+
+/* Remove old close styles if present */
+.window-close {
+    display: none !important;
 }
 
 /* --- 4. RIGHT WIDGETS --- */
@@ -439,6 +534,24 @@ body {
         transform: scale(1);
         box-shadow: 0 5px 10px rgba(255, 105, 180, 0.2);
     }
+}
+
+@keyframes spin-crazy {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.spin-effect {
+    animation: spin-crazy 0.8s ease-in-out;
 }
 
 /* --- COMPONENTS --- */
@@ -678,10 +791,13 @@ body {
         left: 50% !important;
         transform: translate(-50%, -50%) scale(0) !important;
         width: 90vw;
-        max-height: 80vh;
+        max-height: 85vh;
         z-index: 9999;
         margin: 0;
         overflow-y: auto;
+        padding-bottom: 100px;
+        /* Extra padding to prevent bottom cut-off */
+        overscroll-behavior: contain;
     }
 
     .glass-window.open {
