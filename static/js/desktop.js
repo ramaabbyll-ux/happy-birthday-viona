@@ -205,4 +205,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
     }
+    // --- CLOSE MODAL ON OUTSIDE CLICK ---
+    document.addEventListener('click', (e) => {
+        // Check if the click is inside a window or on an icon (trigger)
+        const isClickInsideModal = e.target.closest('.glass-window');
+        const isClickOnTrigger = e.target.closest('.circle-icon');
+
+        // If click is outside modal AND not on a trigger button
+        if (!isClickInsideModal && !isClickOnTrigger) {
+            document.querySelectorAll('.glass-window.open').forEach(modal => {
+                modal.classList.remove('open');
+            });
+        }
+    });
+
 });
